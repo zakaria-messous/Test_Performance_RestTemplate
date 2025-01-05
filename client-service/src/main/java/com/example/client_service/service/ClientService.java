@@ -1,25 +1,23 @@
 package com.example.client_service.service;
 
-import com.example.client_service.entity.Client;
-import com.example.client_service.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+import java.util.Arrays;
 
 @Service
 public class ClientService {
 
     @Autowired
-    private ClientRepository clientRepository;
+    private RestTemplate restTemplate;
 
-    // Save a client to the database
-    public Client saveClient(Client client) {
-        return clientRepository.save(client);
-    }
+    private static final String CAR_SERVICE_URL = "http://CAR-SERVICE/cars/";
 
-    // Retrieve all clients from the database
-    public List<Client> getAllClients() {
-        return clientRepository.findAll();
+    // Fetch cars for a specific client using RestTemplate
+    public List<Object> getCarsForClient(int clientId) {
+        Object[] cars = restTemplate.getForObject(CAR_SERVICE_URL + clientId, Object[].class);
+        return Arrays.asList(cars);
     }
 }
