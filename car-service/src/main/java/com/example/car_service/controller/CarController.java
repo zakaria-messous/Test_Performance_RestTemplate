@@ -16,9 +16,15 @@ public class CarController {
     private CarService carService;
 
     // Obtenir les voitures d'un client
-    @GetMapping("/client/{clientId}")
+    @GetMapping("/{clientId}")
     public ResponseEntity<List<Car>> getCarsByClientId(@PathVariable int clientId) {
         List<Car> cars = carService.getCarsByClientId(clientId);
+        return ResponseEntity.ok(cars);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Car>> getAllCars() {
+        List<Car> cars = carService.getAllCars();
         return ResponseEntity.ok(cars);
     }
 

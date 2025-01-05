@@ -17,6 +17,10 @@ public class CarService {
         return carRepository.findByClientId(clientId);
     }
 
+    public List<Car> getAllCars() {
+        return carRepository.findAll();
+    }
+
     public Car saveCar(Car car) {
         return carRepository.save(car);
     }
