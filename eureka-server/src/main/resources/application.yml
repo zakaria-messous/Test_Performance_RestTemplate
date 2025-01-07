@@ -1,9 +1,40 @@
 server:
   port: 8761
 
+spring:
+  application:
+    name: eureka-server
+
 eureka:
   client:
-    register-with-eureka: false # Le serveur ne doit pas s'enregistrer lui-même
-    fetch-registry: false       # Le serveur ne doit pas essayer de récupérer les instances enregistrées
-  instance:
-    hostname: localhost
+    register-with-eureka: false
+    fetch-registry: false
+  server:
+    enable-self-preservation: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, prometheus # Expose these endpoints
+  metrics:
+    enable:
+      http.server.requests: true # Enable HTTP server request metrics
+  endpoint:
+    prometheus:
+      enabled: true # Enable Prometheus actuator endpoint
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+
+# If using service discovery like Consul:
+# spring:
+#   cloud:
+#     consul:
+#       host: localhost
+#       port: 8500
+#       discovery:
+#         register: true
+#         enabled: true
+#         prefer-ip-address: true
