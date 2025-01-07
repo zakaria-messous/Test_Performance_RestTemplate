@@ -37,3 +37,14 @@ management:
     metrics:
       export:
         enabled: true
+
+# If using service discovery like Consul:
+# spring:
+#   cloud:
+#     consul:
+#       host: localhost
+#       port: 8500
+#       discovery:
+#         register: true
+#         enabled: true
+#         prefer-ip-address: true
